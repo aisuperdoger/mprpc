@@ -2,7 +2,7 @@
 #include <string>
 #include "user.pb.h"
 #include "mprpcapplication.h"
-#include "rpcprovider.h"
+#include "rpcprovider.h"  // 由于上层的CMakeLists.txt文件中指定了头文件的搜索路径为src/includes，所以这里直接写#include "rpcprovider.h"，不用写成#include "../../src/rpcprovider.h" 
 
 /*
 UserService原来是一个本地服务，提供了两个进程内的本地方法，Login和GetFriendLists
@@ -73,7 +73,7 @@ public:
 int main(int argc, char **argv)
 {
     // 调用框架的初始化操作
-    MprpcApplication::Init(argc, argv); // argc, argv代表的传入的配置文件
+    MprpcApplication::Init(argc, argv); //  argv代表的传入的配置文件
 
     // provider是一个rpc网络服务对象。把UserService对象发布到rpc节点上，发布以后，远程就可以调用发布的服务。
     RpcProvider provider;

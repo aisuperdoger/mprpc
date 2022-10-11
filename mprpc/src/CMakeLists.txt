@@ -1,4 +1,4 @@
-#aux_source_directory(. SRC_LIST)
+#aux_source_directory(. SRC_LIST) // 当前目录的所有源文件放入变量SRC_LIST中
 set(SRC_LIST 
     mprpcapplication.cc 
     mprpcconfig.cc 

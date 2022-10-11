@@ -13,23 +13,23 @@ void MprpcConfig::LoadConfigFile(const char *config_file)
         exit(EXIT_FAILURE);
     }
 
-    // 1.注释   2.正确的配置项 =    3.去掉开头的多余的空格 
+    // 需要处理的东西： 1.注释   2.正确的配置项 =    3.去掉开头的多余的空格 
     while(!feof(pf))
     {
-        char buf[512] = {0};
-        fgets(buf, 512, pf);
+        char buf[512] = {0}; 
+        fgets(buf, 512, pf); // 一行超过512个字节，是不是就出问题了
 
         // 去掉字符串前面多余的空格
         std::string read_buf(buf);
         Trim(read_buf);
 
         // 判断#的注释
-        if (read_buf[0] == '#' || read_buf.empty())
+        if (read_buf[0] == '#' || read_buf.empty()) // read_buf.empty()代表去除空格以后得到的字符串是空的
         {
             continue;
         }
 
-        // 解析配置项
+        // 解析配置项   
         int idx = read_buf.find('=');
         if (idx == -1)
         {
@@ -60,12 +60,14 @@ std::string MprpcConfig::Load(const std::string &key)
         return "";
     }
     return it->second;
+
+    // 这里不能使用return m_configMap[key]，因为m_configMap[key]会向m_configMap中添加键值对
 }
 
 // 去掉字符串前后的空格
 void MprpcConfig::Trim(std::string &src_buf)
 {
-    int idx = src_buf.find_first_not_of(' ');
+    int idx = src_buf.find_first_not_of(' '); // 返回第一个不为空格的，下标
     if (idx != -1)
     {
         // 说明字符串前面有空格
