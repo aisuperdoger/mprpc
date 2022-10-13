@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "../../lib/libmprpc.a"
+  "/home/ubuntu1/projects/cpp/mprpc/mprpc/lib/libmprpc.a"
 )

@@ -43,7 +43,7 @@ void MprpcConfig::LoadConfigFile(const char *config_file)
         Trim(key);
         // rpcserverip=127.0.0.1\n
         int endidx = read_buf.find('\n', idx);
-        value = read_buf.substr(idx+1, endidx-idx-1);
+        value = read_buf.substr(idx+1, endidx-idx-1); // 去掉换行
         Trim(value);
         m_configMap.insert({key, value});
     }
